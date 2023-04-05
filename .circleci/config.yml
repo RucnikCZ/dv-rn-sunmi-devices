@@ -12,6 +12,9 @@ commands:
       - attach_workspace:
           at: ~/project
 
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
 jobs:
   install-dependencies:
     executor: default
