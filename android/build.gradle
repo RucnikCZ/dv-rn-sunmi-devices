@@ -7,7 +7,7 @@ buildscript {
         }
 
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.5.3'
+            classpath 'com.android.tools.build:gradle:4.2.2'
         }
     }
 }
@@ -44,10 +44,16 @@ android {
 
 repositories {
     mavenLocal()
-    maven {
-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-        url("$rootDir/../node_modules/react-native/android")
-    }
+      exclusiveContent {
+             filter {
+                 includeGroup "com.facebook.react"
+             }
+             forRepository {
+                 maven {
+                     url "$rootDir/../node_modules/react-native/android"
+                 }
+             }
+         }
     google()
     mavenCentral()
     jcenter()
