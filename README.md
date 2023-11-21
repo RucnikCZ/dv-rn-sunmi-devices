@@ -13,7 +13,9 @@ npm install dv-rn-sunmi-devices
 ```js
 import SunmiPrinter from 'dv-rn-sunmi-devices';
 ```
+
 ## Print Custom HTML
+
 Automatically cuts paper after print
 
 ```js
@@ -29,6 +31,7 @@ const printHTML = async () => {
 ```
 
 ## Show text on 2 line display
+
 ```js
 const showTwoLineText = async () => {
   await SunmiPrinter.showTwoLineText("Test","Dvou řádků")
@@ -40,6 +43,7 @@ const showTwoLineText = async () => {
 };
 
 ```
+
 ## Write NFC data to Tag
 
 ```js
@@ -59,7 +63,9 @@ const writeChip = async () => {
 ```
 
 ## Event listener
+
 For listening when Tag get nears device.
+
 ```js
 const chipLoad = async ( data: string ) =>{
   console.error(data)

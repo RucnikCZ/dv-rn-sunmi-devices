@@ -1,14 +1,22 @@
-import { NativeModules} from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
-const { DvRnSunmiDevices} = NativeModules;
+const LINKING_ERROR =
+  `The package 'dv-rn-sunmi-devices' doesn't seem to be linked. Make sure: \n\n` +
+  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
+  '- You rebuilt the app after installing the package\n' +
+  '- You are not using Expo Go\n';
 
-type SunmiPrinter ={
-  printCustomHTMl: (htmlToConvert: string) => Promise<boolean>;
-  showTwoLineText: (firstRow: string, secondRow: string) => Promise<boolean>;
-  writeNFCTag: (data :ReadonlyMap<String, String>) => Promise<boolean>;
-  CHIP_EVENT: "CHIP_LOADED"
+const DvRnSunmiDevices = NativeModules.DvRnSunmiDevices
+  ? NativeModules.DvRnSunmiDevices
+  : new Proxy(
+      {},
+      {
+        get() {
+          throw new Error(LINKING_ERROR);
+        },
+      }
+    );
+
+export function multiply(a: number, b: number): Promise<number> {
+  return DvRnSunmiDevices.multiply(a, b);
 }
-
-export default DvRnSunmiDevices as SunmiPrinter;
-
-
