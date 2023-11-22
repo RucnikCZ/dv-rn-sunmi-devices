@@ -41,7 +41,6 @@ const showTwoLineText = async () => {
       console.error(err)
     })
 };
-
 ```
 
 ## Write NFC data to Tag
@@ -60,6 +59,20 @@ const writeChip = async () => {
       console.error(err)
     })
 };
+```
+
+## Read printer status
+
+```
+const getPrinterStatus = async () => {
+    await SunmiPrinter.getPrinterStatus()
+      .then((res) => {
+        console.error(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 ```
 
 ## Event listener
