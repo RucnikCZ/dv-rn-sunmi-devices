@@ -1,22 +1,27 @@
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules } from 'react-native';
 
-const LINKING_ERROR =
-  `The package 'dv-rn-sunmi-devices' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
-  '- You rebuilt the app after installing the package\n' +
-  '- You are not using Expo Go\n';
+const { DvRnSunmiDevices } = NativeModules;
 
-const DvRnSunmiDevices = NativeModules.DvRnSunmiDevices
-  ? NativeModules.DvRnSunmiDevices
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+type SunmiPrinter = {
+  printCustomHTMl: (htmlToConvert: string) => Promise<boolean>;
+  showTwoLineText: (firstRow: string, secondRow: string) => Promise<boolean>;
+  writeNFCTag: (data: ReadonlyMap<String, String>) => Promise<boolean>;
+  /**
+   *  0 - UNKNOWN_STATE
+   *  1 - READY_FOR_PRINT
+   *  2 - PREPARING_PRINTER
+   *  3 - ABNORMAL_COMMUNICATION
+   *  4 - OUT_OF_PAPER
+   *  5 - OVERHEATED
+   *  6 - OPEN_THE_LID
+   *  7 - PAPER_CUT_IS_ABNORMAL
+   *  8 - PAPER_CUT_RECOVERED
+   *  9 - NO_BLACK_MARK
+   *  505 - NO_PRINTER(
+   *  507 - FAILED_TO_UPGRADE_FIRMWARE(
+   * */
+  getPrinterStatus: () => Promise<number>;
+  CHIP_EVENT: 'CHIP_LOADED';
+};
 
-export function multiply(a: number, b: number): Promise<number> {
-  return DvRnSunmiDevices.multiply(a, b);
-}
+export default DvRnSunmiDevices as SunmiPrinter;

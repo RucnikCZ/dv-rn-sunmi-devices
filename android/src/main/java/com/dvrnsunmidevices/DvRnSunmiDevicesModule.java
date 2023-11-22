@@ -70,32 +70,13 @@ public class DvRnSunmiDevicesModule extends ReactContextBaseJavaModule {
     bridgeManager.writeNFCTag(data, tag, promise);
   }
 
-/*   @Override
-  public void onNewIntent(Intent intent) {
-    try {
-      tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-
-      WritableMap credentials = Arguments.createMap();
-      if (tag != null) {
-        if (MifareUltralight.get(tag) != null)
-          credentials = HardwareManager.getInstance().readTagData(tag);
-        credentials.putString("nfcId", bytesToHex(tag.getId()));
-      }
-      sendEvent(this.reactContext, CHIP_EVENT, credentials);
-
-    } catch (IOException e) {
-      e.printStackTrace();
-      try {
-        MifareUltralight uTag = MifareUltralight.get(tag);
-        if (uTag != null)
-          uTag.close();
-      } catch (IOException err) {
-        err.printStackTrace();
-      }
-      sendEvent(this.reactContext, CHIP_EVENT, null);
-    }
-  } */
-
+  /**
+   * @param promise
+   */
+  @ReactMethod
+  public void getPrinterStatus(Promise promise) {
+    bridgeManager.updatePrinterState(promise);
+  }
 
   private void sendEvent(ReactContext reactContext,
                          String eventName,

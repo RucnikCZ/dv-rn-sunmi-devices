@@ -15,6 +15,7 @@ export default function App() {
         console.error(err);
       });
   };
+
   const showTwoLineText = async () => {
     await SunmiPrinter.showTwoLineText('Test', 'Dvou řádků')
       .then((res) => {
@@ -40,6 +41,16 @@ export default function App() {
       });
   };
 
+  const getPrinterStatus = async () => {
+    await SunmiPrinter.getPrinterStatus()
+      .then((res) => {
+        console.error(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const chipLoad = async (data: string) => {
     console.error(data);
   };
@@ -53,6 +64,7 @@ export default function App() {
       <Button title={'Tisk účtenky'} onPress={() => printHTML()} />
       <Button title={'2 line display test'} onPress={() => showTwoLineText()} />
       <Button title={'Zapsat data na čip'} onPress={() => writeChip()} />
+      <Button title={'Informace o tiskárně'} onPress={() => getPrinterStatus()} />
     </View>
   );
 }

@@ -84,6 +84,10 @@ public class HardwareManager {
     SunmiUtil.getInstance().cutPaper(null);
   }
 
+  public void updatePrinterState(){
+    SunmiUtil.getInstance().updatePrinterState();
+  }
+
   public void writeToNFCTag(Tag tag, List<String> data) {
     MifareUltralight ultralight = null;
     ultralight = MifareUltralight.get(tag);

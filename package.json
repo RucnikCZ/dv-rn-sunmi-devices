@@ -26,7 +26,7 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace dv-rn-sunmi-devices-example run android",
+    "example": "yarn workspace dv-rn-sunmi-devices-example react-native run-android",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",

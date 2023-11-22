@@ -26,7 +26,6 @@ import java.util.List;
 import woyou.aidlservice.jiuiv5.ICallback;
 import woyou.aidlservice.jiuiv5.IWoyouService;
 
-
 public class SunmiUtil {
   private static final String SERVICE＿PACKAGE = "woyou.aidlservice.jiuiv5";
   private static final String SERVICE＿ACTION = "woyou.aidlservice.jiuiv5.IWoyouService";
@@ -266,6 +265,15 @@ public class SunmiUtil {
       }
     }
   */
+
+  public  void updatePrinterState(){
+    try {
+      promise.resolve(woyouService.updatePrinterState());
+    } catch (RemoteException e) {
+      promise.reject(e);
+    }
+  }
+
   public void passCallback(Promise promise) {
     this.promise = promise;
   }
